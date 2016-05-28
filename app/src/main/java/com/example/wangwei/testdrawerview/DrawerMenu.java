@@ -18,6 +18,7 @@ public class DrawerMenu extends FrameLayout {
     private int menuViewWidth = 0;
     private int downX = 0;
     private Scroller scroller;
+    private boolean opened = false;
 
     public DrawerMenu(Context context) {
         this(context, null);
@@ -85,14 +86,24 @@ public class DrawerMenu extends FrameLayout {
 
     public void close()
     {
+        opened = false;
         scroller.startScroll(getScrollX(),0,-getScrollX(),0,400);
         invalidate();
     }
 
     public void open()
     {
+        opened = true;
         scroller.startScroll(getScrollX(),0,-(menuViewWidth+getScrollX()),0,400);
         invalidate();
+    }
+
+    public void toggleBtn()
+    {
+        if(opened)
+            close();
+        else
+            open();
     }
 
     @Override
